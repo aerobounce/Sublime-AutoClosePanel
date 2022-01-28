@@ -2,6 +2,8 @@
 
 ### Small QoL improvement for Sublime Text
 
+Hide unneeded output panels automatically on save, with regular expressions.
+
 <p>
     <img src="https://img.shields.io/badge/Platform-Linux / macOS / Windows-blue.svg" />
     <img src="https://img.shields.io/badge/Sublime Text-3+-orange.svg" />
@@ -13,12 +15,12 @@
 
 ## Commands
 
-**Command** is the name of the command you can use for **Key-Bindings**.
+> **Command** is the name of the command you can use for **Key-Bindings**.
 
-| Caption                                            | Command                         |
-| -------------------------------------------------- | ------------------------------- |
-| **Auto Close Panel: Test Patterns**                | `auto_close_panel_close`        |
-| **Auto Close Panel: Print Panel Names to Console** | `auto_close_panel_print_panels` |
+| Caption                                          | Command                         | Usage                                          |
+| ------------------------------------------------ | ------------------------------- | ---------------------------------------------- |
+| `Auto Close Panel: Test Patterns`                | `auto_close_panel_close`        | Check if patterns match without saving a file  |
+| `Auto Close Panel: Print Panel Names to Console` | `auto_close_panel_print_panels` | Print name of available output panels          |
 
 ## Example
 
