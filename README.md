@@ -4,10 +4,8 @@
 
 Hide unneeded output panels automatically on save, with regular expressions.
 
-<p>
-    <img src="https://img.shields.io/badge/Platform-Linux / macOS / Windows-blue.svg" />
-    <img src="https://img.shields.io/badge/Sublime Text-3+-orange.svg" />
-</p>
+![](https://img.shields.io/badge/Platform-Linux%20/%20macOS%20/%20Windows-blue.svg)
+![](https://img.shields.io/badge/Sublime%20Text-3+-orange.svg)
 
 ## Install
 
