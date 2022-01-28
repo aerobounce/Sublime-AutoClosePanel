@@ -14,25 +14,25 @@ import sublime_plugin
 
 SETTINGS_FILENAME = "AutoClosePanel.sublime-settings"
 SETTINGS_KEYS = ["enabled", "target_panels"]
+ON_CHANGE_TAG = "reload_settings"
 
 def plugin_loaded():
+    AutoClosePanel.settings = sublime.load_settings(SETTINGS_FILENAME)
     AutoClosePanel.reload_settings()
-    settings = sublime.load_settings(SETTINGS_FILENAME)
-    for key in SETTINGS_KEYS: settings.add_on_change(key, AutoClosePanel.reload_settings)
+    AutoClosePanel.settings.add_on_change(ON_CHANGE_TAG, AutoClosePanel.reload_settings)
 
 def plugin_unloaded():
-    settings = sublime.load_settings(SETTINGS_FILENAME)
-    for key in SETTINGS_KEYS: settings.clear_on_change(key)
+    AutoClosePanel.settings.clear_on_change(ON_CHANGE_TAG)
 
 class AutoClosePanel():
+    settings = sublime.load_settings(SETTINGS_FILENAME)
     is_plugin_enabled = False
     target_panels = {}
 
     @staticmethod
     def reload_settings():
-        settings = sublime.load_settings(SETTINGS_FILENAME)
-        AutoClosePanel.is_plugin_enabled = settings.get(SETTINGS_KEYS[0])
-        AutoClosePanel.target_panels = settings.get(SETTINGS_KEYS[1])
+        AutoClosePanel.is_plugin_enabled = AutoClosePanel.settings.get(SETTINGS_KEYS[0])
+        AutoClosePanel.target_panels = AutoClosePanel.settings.get(SETTINGS_KEYS[1])
 
     @staticmethod
     def print_all_window_panels():
