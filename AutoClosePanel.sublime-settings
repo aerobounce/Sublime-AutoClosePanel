@@ -1,0 +1,12 @@
+{
+    // Enables this plugin.
+    "enabled": true,
+    // Sets of panel name (key) and mathing REGEX patterns (value).
+    // You can specify multiple patterns to avoid too complex pattern.
+    "target_panels": {
+        // Example with Build output panel:
+        // - "exec": [".*\\[(Finished.*?|Cancelled)\\]$"]
+        // Note: Panel name must be specified without "output." prefix.
+        "": []
+    }
+}

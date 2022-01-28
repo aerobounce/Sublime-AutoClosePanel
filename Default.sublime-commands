@@ -1,0 +1,18 @@
+[
+    {
+        "caption": "Auto Close Panel: Test Patterns",
+        "command": "auto_close_panel_close",
+    },
+    {
+        "caption": "Auto Close Panel: Print Panel Names to Console",
+        "command": "auto_close_panel_print_panels",
+    },
+    {
+        "caption": "Auto Close Panel: Settings",
+        "command": "edit_settings",
+        "args": {
+            "base_file": "${packages}/AutoClosePanel/AutoClosePanel.sublime-settings",
+            "default": "{\n    \"target_panels\": {}\n}"
+        }
+    }
+]
