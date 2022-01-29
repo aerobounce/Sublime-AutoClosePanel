@@ -29,30 +29,30 @@ class AutoClosePanel():
     is_plugin_enabled = False
     target_panels = {}
 
-    @staticmethod
-    def reload_settings():
-        AutoClosePanel.is_plugin_enabled = AutoClosePanel.settings.get(SETTINGS_KEYS[0])
-        AutoClosePanel.target_panels = AutoClosePanel.settings.get(SETTINGS_KEYS[1])
+    @classmethod
+    def reload_settings(cls):
+        cls.is_plugin_enabled = cls.settings.get(SETTINGS_KEYS[0])
+        cls.target_panels = cls.settings.get(SETTINGS_KEYS[1])
 
-    @staticmethod
-    def print_all_window_panels():
+    @classmethod
+    def print_all_window_panels(cls):
         for window in sublime.windows():
             active_panel_name = window.active_panel()
             if active_panel_name:
                 print("[AutoClosePanel] Found panel:", active_panel_name)
 
-    @staticmethod
-    def hide_panel(window):
-        if not AutoClosePanel.is_plugin_enabled: return
+    @classmethod
+    def hide_panel(cls, window):
+        if not cls.is_plugin_enabled: return
         panel_name = (window.active_panel() or "").replace("output.", "")
 
-        if not panel_name in AutoClosePanel.target_panels.keys(): return
+        if not panel_name in cls.target_panels.keys(): return
         active_panel = window.find_output_panel(panel_name)
 
         if active_panel == None: return
         all_text = active_panel.substr(sublime.Region(0, active_panel.size()))
 
-        for pattern in AutoClosePanel.target_panels[panel_name]:
+        for pattern in cls.target_panels[panel_name]:
             if re.match(pattern, all_text):
                 window.run_command("hide_panel", { "panel": "output." + panel_name })
                 return
