@@ -1,6 +1,6 @@
 [
     {
-        "caption": "Auto Close Panel: Test Patterns",
+        "caption": "Auto Close Panel: Close Panel",
         "command": "auto_close_panel_close",
     },
     {

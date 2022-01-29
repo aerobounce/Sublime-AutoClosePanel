@@ -9,16 +9,18 @@ Hide unneeded output panels automatically on save, with regular expressions.
 
 ## Install
 
-- Clone this repository to `.../Sublime Text/Packages/`.
+Clone this repository to `.../Sublime Text/Packages/`.
 
 ## Commands
 
-> **Command** is the name of the command you can use for **Key-Bindings**.
+### Close Panel
 
-| Caption                                          | Command                         | Usage                                          |
-| ------------------------------------------------ | ------------------------------- | ---------------------------------------------- |
-| `Auto Close Panel: Test Patterns`                | `auto_close_panel_close`        | Check if patterns match without saving a file  |
-| `Auto Close Panel: Print Panel Names to Console` | `auto_close_panel_print_panels` | Print name of available output panels          |
+Close panel manually using patterns in settings.\
+You can disable close on save feature and bind this command to a key instead.
+
+### Print Panel Names to Console
+
+Print name of available output panels.
 
 ## Example
 

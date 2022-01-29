@@ -13,7 +13,7 @@ import sublime
 import sublime_plugin
 
 SETTINGS_FILENAME = "AutoClosePanel.sublime-settings"
-SETTINGS_KEYS = ["enabled", "target_panels"]
+SETTINGS_KEYS = ["close_panel_on_save", "target_panels"]
 ON_CHANGE_TAG = "reload_settings"
 
 def plugin_loaded():
@@ -43,7 +43,6 @@ class AutoClosePanel():
 
     @classmethod
     def hide_panel(cls, window):
-        if not cls.is_plugin_enabled: return
         panel_name = (window.active_panel() or "").replace("output.", "")
 
         if not panel_name in cls.target_panels.keys(): return
@@ -67,4 +66,5 @@ class AutoClosePanelPrintPanelsCommand(sublime_plugin.WindowCommand):
 
 class AutoClosePanelListener(sublime_plugin.EventListener):
     def on_pre_save_async(self, view):
+        if not AutoClosePanel.is_plugin_enabled: return
         AutoClosePanel.hide_panel(view.window())

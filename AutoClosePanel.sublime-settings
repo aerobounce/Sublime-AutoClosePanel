@@ -1,6 +1,6 @@
 {
-    // Enables this plugin.
-    "enabled": true,
+    // Close panel on save.
+    "close_panel_on_save": true,
     // Sets of panel name (key) and mathing REGEX patterns (value).
     // You can specify multiple patterns to avoid too complex pattern.
     "target_panels": {
