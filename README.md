@@ -37,7 +37,8 @@ Clone this repository to `.../Sublime Text/Packages/`.
         ],
         // Sublime Text Build output panel
         "exec": [
-            ".*\\[(Finished.*?|Cancelled)\\]$"
+            ".*\\[(Finished in \\d+.*?|Cancelled|Finished)\\]$",
+            ".*\\[Finished in \\d+.*? with exit code \\d+.*?\\].*",
         ]
     }
 }
