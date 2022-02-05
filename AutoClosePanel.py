@@ -57,7 +57,7 @@ class AutoClosePanel:
         all_text = active_panel.substr(sublime.Region(0, active_panel.size()))
 
         for pattern in cls.target_panels[panel_name]:
-            if re.match(pattern, all_text):
+            if re.findall(pattern, all_text):
                 window.run_command("hide_panel", {"panel": "output." + panel_name})
                 return
 
