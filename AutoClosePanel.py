@@ -8,9 +8,9 @@
 # Copyright © 2022 to Present, aerobounce. All rights reserved.
 #
 
-import re
-import sublime
-import sublime_plugin
+from re import findall
+from sublime import Region, load_settings, load_settings, windows
+from sublime_plugin import EventListener, WindowCommand
 
 SETTINGS_FILENAME = "AutoClosePanel.sublime-settings"
 SETTINGS_KEYS = ["close_panel_on_save", "target_panels"]
@@ -18,7 +18,7 @@ ON_CHANGE_TAG = "reload_settings"
 
 
 def plugin_loaded():
-    AutoClosePanel.settings = sublime.load_settings(SETTINGS_FILENAME)
+    AutoClosePanel.settings = load_settings(SETTINGS_FILENAME)
     AutoClosePanel.reload_settings()
     AutoClosePanel.settings.add_on_change(ON_CHANGE_TAG, AutoClosePanel.reload_settings)
 
@@ -28,7 +28,7 @@ def plugin_unloaded():
 
 
 class AutoClosePanel:
-    settings = sublime.load_settings(SETTINGS_FILENAME)
+    settings = load_settings(SETTINGS_FILENAME)
     is_plugin_enabled = False
     target_panels = {}
 
@@ -39,7 +39,7 @@ class AutoClosePanel:
 
     @classmethod
     def print_all_window_panels(cls):
-        for window in sublime.windows():
+        for window in windows():
             active_panel_name = window.active_panel()
             if active_panel_name:
                 print("[AutoClosePanel] Found panel:", active_panel_name)
@@ -54,25 +54,25 @@ class AutoClosePanel:
 
         if active_panel == None:
             return
-        all_text = active_panel.substr(sublime.Region(0, active_panel.size()))
+        all_text = active_panel.substr(Region(0, active_panel.size()))
 
         for pattern in cls.target_panels[panel_name]:
-            if re.findall(pattern, all_text):
+            if findall(pattern, all_text):
                 window.run_command("hide_panel", {"panel": "output." + panel_name})
                 return
 
 
-class AutoClosePanelCloseCommand(sublime_plugin.WindowCommand):
+class AutoClosePanelCloseCommand(WindowCommand):
     def run(self):
         AutoClosePanel.hide_panel(self.window)
 
 
-class AutoClosePanelPrintPanelsCommand(sublime_plugin.WindowCommand):
+class AutoClosePanelPrintPanelsCommand(WindowCommand):
     def run(self):
         AutoClosePanel.print_all_window_panels()
 
 
-class AutoClosePanelListener(sublime_plugin.EventListener):
+class AutoClosePanelListener(EventListener):
     def on_pre_save_async(self, view):
         if not AutoClosePanel.is_plugin_enabled:
             return
