@@ -9,11 +9,10 @@
 #
 
 from re import findall
-from sublime import Region, load_settings, load_settings, windows
+from sublime import Region, View, Window, load_settings, windows
 from sublime_plugin import EventListener, WindowCommand
 
 SETTINGS_FILENAME = "AutoClosePanel.sublime-settings"
-SETTINGS_KEYS = ["close_panel_on_save", "target_panels"]
 ON_CHANGE_TAG = "reload_settings"
 
 
@@ -29,13 +28,17 @@ def plugin_unloaded():
 
 class AutoClosePanel:
     settings = load_settings(SETTINGS_FILENAME)
-    is_plugin_enabled = False
+    close_panel_on_save = False
+    close_panel_on_activate = False
+    matching_mode = 2
     target_panels = {}
 
     @classmethod
     def reload_settings(cls):
-        cls.is_plugin_enabled = cls.settings.get(SETTINGS_KEYS[0])
-        cls.target_panels = cls.settings.get(SETTINGS_KEYS[1])
+        cls.close_panel_on_save = cls.settings.get("close_panel_on_save")
+        cls.close_panel_on_activate = cls.settings.get("close_panel_on_activate")
+        cls.matching_mode = cls.settings.get("matching_mode")
+        cls.target_panels = cls.settings.get("target_panels")
 
     @classmethod
     def print_all_window_panels(cls):
@@ -45,7 +48,7 @@ class AutoClosePanel:
                 print("[AutoClosePanel] Found panel:", active_panel_name)
 
     @classmethod
-    def hide_panel(cls, window):
+    def hide_panel(cls, window: Window):
         panel_name = (window.active_panel() or "").replace("output.", "")
 
         if not panel_name in cls.target_panels.keys():
@@ -54,11 +57,33 @@ class AutoClosePanel:
 
         if active_panel == None:
             return
-        all_text = active_panel.substr(Region(0, active_panel.size()))
 
-        for pattern in cls.target_panels[panel_name]:
-            if findall(pattern, all_text):
-                window.run_command("hide_panel", {"panel": "output." + panel_name})
+        def hide_matched_panel(text: str) -> bool:
+            for pattern in cls.target_panels[panel_name]:
+                if findall(pattern, text):
+                    window.run_command("hide_panel", {"panel": "output." + panel_name})
+                    return True
+            return False
+
+        entire_region = Region(0, active_panel.size())
+
+        # Find in the entire string
+        if cls.matching_mode == 0:
+            hide_matched_panel(active_panel.substr(entire_region))
+            return
+
+        # Find line by line from the top of string
+        if cls.matching_mode == 1:
+            regions_of_lines = active_panel.split_by_newlines(entire_region)
+
+        # Find line by line from the bottom of string
+        # No strict checking here at the moment.
+        else:
+            regions_of_lines = active_panel.split_by_newlines(entire_region)
+            regions_of_lines.reverse()
+
+        for region in regions_of_lines:
+            if hide_matched_panel(active_panel.substr(region)):
                 return
 
 
@@ -73,7 +98,24 @@ class AutoClosePanelPrintPanelsCommand(WindowCommand):
 
 
 class AutoClosePanelListener(EventListener):
-    def on_pre_save(self, view):
-        if not AutoClosePanel.is_plugin_enabled:
-            return
-        AutoClosePanel.hide_panel(view.window())
+    last_activated_view_id = -999
+
+    def on_pre_save(self, view: View):
+        if AutoClosePanel.close_panel_on_save:
+            window = view.window()
+            if window:
+                AutoClosePanel.hide_panel(window)
+
+    def on_activated_async(self, view: View):
+        if AutoClosePanel.close_panel_on_activate:
+            # This hook is called for output panel view too.
+            # Prevent unintended close by checking filename.
+            if view.file_name() == None:
+                return
+            # Prevent unintended close in cases e.g.:
+            #  Build -> Focus Result -> Focus Built View
+            if self.last_activated_view_id != view.id():
+                self.last_activated_view_id = view.id()
+                window = view.window()
+                if window:
+                    AutoClosePanel.hide_panel(window)
