@@ -73,7 +73,7 @@ class AutoClosePanelPrintPanelsCommand(WindowCommand):
 
 
 class AutoClosePanelListener(EventListener):
-    def on_pre_save_async(self, view):
+    def on_pre_save(self, view):
         if not AutoClosePanel.is_plugin_enabled:
             return
         AutoClosePanel.hide_panel(view.window())
