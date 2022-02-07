@@ -6,7 +6,7 @@ Hide unneeded output panels automatically on save, with regular expressions.
 
 [![](https://img.shields.io/badge/Platform-Linux%20/%20macOS%20/%20Windows-blue.svg)][packagecontrol]
 [![](https://img.shields.io/badge/Sublime%20Text-3+-orange.svg)][packagecontrol]
-[![](https://img.shields.io/github/v/tag/aerobounce/Sublime-AutoClosePanel?display_name=tag)][packagecontrol]
+[![](https://img.shields.io/github/v/tag/aerobounce/Sublime-AutoClosePanel?display_name=tag)][tags]
 
 ## Install
 
@@ -44,4 +44,5 @@ Clone this repository to `.../Sublime Text/Packages/`.
 }
 ```
 
-[packagecontrol]: https://packagecontrol.io/packages/Swift%20Format
+[tags]: https://github.com/aerobounce/Sublime-AutoClosePanel/tags
+[packagecontrol]: https://github.com/aerobounce/Sublime-AutoClosePanel
