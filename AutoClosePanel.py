@@ -12,6 +12,7 @@ from re import findall
 from sublime import Region, View, Window, load_settings, windows
 from sublime_plugin import EventListener, WindowCommand
 
+
 SETTINGS_FILENAME = "AutoClosePanel.sublime-settings"
 ON_CHANGE_TAG = "reload_settings"
 
@@ -31,6 +32,7 @@ class AutoClosePanel:
     close_panel_on_save = False
     close_panel_on_activate = False
     matching_mode = 2
+    matching_max_count = 5
     target_panels = {}
 
     @classmethod
@@ -38,6 +40,7 @@ class AutoClosePanel:
         cls.close_panel_on_save = cls.settings.get("close_panel_on_save")
         cls.close_panel_on_activate = cls.settings.get("close_panel_on_activate")
         cls.matching_mode = cls.settings.get("matching_mode")
+        cls.matching_max_count = cls.settings.get("matching_max_count")
         cls.target_panels = cls.settings.get("target_panels")
 
     @classmethod
@@ -66,21 +69,35 @@ class AutoClosePanel:
             return False
 
         entire_region = Region(0, active_panel.size())
+        splitted_regions = active_panel.split_by_newlines(entire_region)
 
         # Find in the entire string
-        if cls.matching_mode == 0:
+        if cls.matching_mode == 0 or len(splitted_regions) == 1:
             hide_matched_panel(active_panel.substr(entire_region))
             return
 
-        # Find line by line from the top of string
-        if cls.matching_mode == 1:
-            regions_of_lines = active_panel.split_by_newlines(entire_region)
+        #
+        # TODO: Could this dirty block be a bit more cleaner?
+        #
 
-        # Find line by line from the bottom of string
-        # No strict checking here at the moment.
+        # Limited lines, line by line
+        if cls.matching_max_count > 0:
+            # Find from the top of string
+            if cls.matching_mode == 1:
+                splitted_regions.reverse()
+
+            regions_of_lines = []
+            for _ in range(0, cls.matching_max_count):
+                # Bound check
+                if len(splitted_regions) > 0:
+                    regions_of_lines.append(splitted_regions.pop())
+
+        # Entire text, line by line
         else:
-            regions_of_lines = active_panel.split_by_newlines(entire_region)
-            regions_of_lines.reverse()
+            # Find from the bottom of string
+            if cls.matching_mode == 2:
+                splitted_regions.reverse()
+            regions_of_lines = splitted_regions
 
         for region in regions_of_lines:
             if hide_matched_panel(active_panel.substr(region)):
