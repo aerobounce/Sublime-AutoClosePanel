@@ -9,7 +9,8 @@
 #
 
 from re import findall
-from sublime import Region, View, Window, load_settings, windows
+from sublime import Region, View, Window
+from sublime import load_settings, windows
 from sublime_plugin import EventListener, WindowCommand
 
 
@@ -43,8 +44,8 @@ class AutoClosePanel:
         cls.matching_max_count = cls.settings.get("matching_max_count")
         cls.target_panels = cls.settings.get("target_panels")
 
-    @classmethod
-    def print_all_window_panels(cls):
+    @staticmethod
+    def print_all_window_panels():
         for window in windows():
             active_panel_name = window.active_panel()
             if active_panel_name:
