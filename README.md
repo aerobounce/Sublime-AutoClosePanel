@@ -12,7 +12,14 @@ Hide unneeded output panels automatically on save, with regular expressions.
 
 > Package Control: Currently waiting for PR to be merge
 
-Clone this repository to `.../Sublime Text/Packages/`.
+#### Manual Install
+
+1. On terminal, move to the directory where you can open by `Preferences ▶ Browse Packages`
+2. Clone this repository:
+
+```sh
+git clone "https://github.com/aerobounce/Sublime-AutoClosePanel.git" "AutoClosePanel"
+```
 
 ## Commands
 
