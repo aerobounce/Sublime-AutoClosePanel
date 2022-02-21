@@ -10,7 +10,7 @@ Hide unneeded output panels automatically on save, with regular expressions.
 
 ## Install
 
-> Package Control: Currently waiting for PR to be merge
+> Package Control: Currently waiting for PR to be merged
 
 #### Manual Install
 
