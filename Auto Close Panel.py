@@ -1,7 +1,5 @@
-#!/usr/bin/env python
-# coding: utf-8
 #
-# AutoClosePanel.py
+# Auto Close Panel.py
 #
 # AGPLv3 License
 # Created by github.com/aerobounce on 2022/01/27.
@@ -14,7 +12,7 @@ from sublime import load_settings, windows
 from sublime_plugin import EventListener, WindowCommand
 
 
-SETTINGS_FILENAME = "AutoClosePanel.sublime-settings"
+SETTINGS_FILENAME = "Auto Close Panel.sublime-settings"
 ON_CHANGE_TAG = "reload_settings"
 
 
@@ -49,7 +47,7 @@ class AutoClosePanel:
         for window in windows():
             active_panel_name = window.active_panel()
             if active_panel_name:
-                print("[AutoClosePanel] Found panel:", active_panel_name)
+                print("[Auto Close Panel] Found Panel:", active_panel_name)
 
     @classmethod
     def hide_panel(cls, window: Window):

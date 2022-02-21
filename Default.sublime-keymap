@@ -1,0 +1,15 @@
+[
+    // To enable a binding, copy entry and edit "keys".
+
+    // Auto Close Panel: Close Panel
+    // {
+    //     "command": "auto_close_panel_close",
+    //     "keys": [UNSET]
+    // },
+
+    // Auto Close Panel: Print Panel Names to Console
+    // {
+    //     "command": "auto_close_panel_print_panels",
+    //     "keys": [UNSET]
+    // }
+]

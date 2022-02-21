@@ -1,17 +1,21 @@
 {
     // Close panel on save.
     "close_panel_on_save": true,
+
     // Close panel when a view gains focus.
     "close_panel_on_activate": true,
+
     // Matching mode.
     //  - 0: Entire Text of View
     //  - 1: Line by line from the top
     //  - 2: Line by line from the bottom
     "matching_mode": 2,
+
     // Stop matching after this value.
     // This is in effect only when matching_mode is 1 or 2.
     // 0 means no limit.
     "matching_max_count": 5,
+
     // Sets of panel name (key) and matching REGEX patterns (value).
     // You can specify multiple patterns to avoid too complex pattern.
     "target_panels": {

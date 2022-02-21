@@ -18,7 +18,7 @@ Hide unneeded output panels automatically on save, with regular expressions.
 2. Clone this repository:
 
 ```sh
-git clone "https://github.com/aerobounce/Sublime-AutoClosePanel.git" "AutoClosePanel"
+git clone "https://github.com/aerobounce/Sublime-AutoClosePanel.git" "Auto Close Panel"
 ```
 
 ## Commands
@@ -26,7 +26,6 @@ git clone "https://github.com/aerobounce/Sublime-AutoClosePanel.git" "AutoCloseP
 ### Close Panel
 
 - Close panel manually using patterns in settings.
-> You can disable close on save feature and bind this command to a key instead.
 
 ### Print Panel Names to Console
 

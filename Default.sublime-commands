@@ -8,11 +8,20 @@
         "command": "auto_close_panel_print_panels",
     },
     {
-        "caption": "Auto Close Panel: Settings",
+        "caption": "Preferences: Auto Close Panel Settings",
         "command": "edit_settings",
         "args": {
-            "base_file": "${packages}/AutoClosePanel/AutoClosePanel.sublime-settings",
-            "default": "{\n$0\n}"
+            "base_file": "${packages}/Auto Close Panel/Auto Close Panel.sublime-settings",
+            "default": "{\n$0\n}\n"
+        }
+    },
+    {
+        "caption": "Preferences: Auto Close Panel Key Bindings",
+        "command": "edit_settings",
+        "args": {
+            "base_file": "${packages}/Auto Close Panel/Default.sublime-keymap",
+            "user_file": "${packages}/User/Default ($platform).sublime-keymap",
+            "default": "[\n\t$0\n]\n",
         }
     }
 ]
