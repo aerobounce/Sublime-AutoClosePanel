@@ -2,7 +2,7 @@
 
 ### Small QoL improvement for Sublime Text
 
-Hide unneeded output panels automatically on save, with regular expressions.
+Hide unneeded output panels automatically _on save_ or _when a view gains focus_, with regular expressions.
 
 [![](https://img.shields.io/badge/Platform-Linux%20/%20macOS%20/%20Windows-blue.svg)][packagecontrol]
 [![](https://img.shields.io/badge/Sublime%20Text-3+-orange.svg)][packagecontrol]
