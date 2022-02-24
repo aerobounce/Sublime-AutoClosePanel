@@ -18,10 +18,10 @@
 
     // Sets of panel name (key) and matching REGEX patterns (value).
     // You can specify multiple patterns to avoid too complex pattern.
+    // Note: Panel name must be specified without "output." prefix.
+    // Example with Build output panel:
+    //  - "exec": [".*\\[(Finished.*?|Cancelled)\\]$"]
     "target_panels": {
-        // Note: Panel name must be specified without "output." prefix.
-        // Example with Build output panel:
-        //  - "exec": [".*\\[(Finished.*?|Cancelled)\\]$"]
         "": []
     }
 }
