@@ -7,10 +7,9 @@
 #
 
 from re import findall
-from sublime import Region, View, Window
-from sublime import load_settings, windows
-from sublime_plugin import EventListener, WindowCommand
 
+from sublime import Region, View, Window, load_settings, windows
+from sublime_plugin import EventListener, WindowCommand
 
 SETTINGS_FILENAME = "Auto Close Panel.sublime-settings"
 ON_CHANGE_TAG = "reload_settings"
