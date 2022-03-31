@@ -10,16 +10,10 @@ Hide unneeded output panels automatically _on save_ or _when a view gains focus_
 
 ## Install
 
-> Package Control: Currently waiting for PR to be merged
+> [Available via Package Control][packagecontrol]
 
-#### Manual Install
-
-1. On terminal, move to the directory where you can open by `Preferences ▶ Browse Packages`
-2. Clone this repository:
-
-```sh
-git clone "https://github.com/aerobounce/Sublime-AutoClosePanel.git" "Auto Close Panel"
-```
+1. `Package Control: Install Package`
+2. Install `Auto Close Panel`
 
 ## Commands
 
@@ -36,7 +30,7 @@ git clone "https://github.com/aerobounce/Sublime-AutoClosePanel.git" "Auto Close
 - Close Sublime LSP when no warning or errors are detected
 - Close Build output panel when log ends with `Finished` or `Cancelled`
 
-```json
+```javascript
 {
     "target_panels": {
         // LSP diagnostics Panel
@@ -53,4 +47,4 @@ git clone "https://github.com/aerobounce/Sublime-AutoClosePanel.git" "Auto Close
 ```
 
 [tags]: https://github.com/aerobounce/Sublime-AutoClosePanel/tags
-[packagecontrol]: https://github.com/aerobounce/Sublime-AutoClosePanel
+[packagecontrol]: https://packagecontrol.io/packages/Auto%20Close%20Panel
